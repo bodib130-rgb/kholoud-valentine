@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عيد خلود ❤️</title>
+  <style>
+    :root{
+      --bg1:#0b1020; --bg2:#1a1035;
+      --card:#121a33cc; --txt:#f7f7ff; --muted:#cfd3ff;
+      --pink:#ff4d8d; --pink2:#ff79b0; --gold:#ffd27a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial;
+      color:var(--txt); min-height:100vh;
+      background:
+        radial-gradient(900px 500px at 20% 10%, #ff4d8d33, transparent 60%),
+        radial-gradient(800px 500px at 80% 20%, #ffd27a22, transparent 60%),
+        linear-gradient(160deg,var(--bg1),var(--bg2));
+      overflow-x:hidden;
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:40px 18px 90px;position:relative;z-index:1;}
+    .badge{
+      display:inline-block;
+      padding:10px 14px;border:1px solid #ffffff22;border-radius:999px;
+      background:#ffffff0f;color:var(--muted);font-size:14px;backdrop-filter: blur(10px);
+      margin:0 0 10px;
+    }
+    h1{margin:10px 0 6px;font-size:42px;line-height:1.15}
+    h1 span{color:var(--pink2)}
+    .sub{margin:0 0 22px;color:var(--muted);font-size:18px;line-height:1.7;max-width:65ch;}
+
+    .grid{display:grid;grid-template-columns: 1.3fr .9fr;gap:18px;}
+    @media (max-width:860px){.grid{grid-template-columns:1fr}h1{font-size:34px}}
+
+    .card{
+      background:var(--card);border:1px solid #ffffff20;border-radius:22px;
+      padding:18px;box-shadow: 0 20px 60px #00000055;backdrop-filter: blur(12px);
+      position:relative;overflow:hidden;
+    }
+    .card h2{margin:4px 0 10px;font-size:20px;}
+    .card p{margin:0;color:var(--muted);line-height:1.85;font-size:16px;}
+    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+    button{
+      cursor:pointer;border:none;border-radius:14px;padding:12px 14px;
+      font-weight:700;font-size:15px;transition:.18s transform,.18s filter;
+    }
+    .btnLove{background: linear-gradient(135deg, var(--pink), var(--pink2));color:white;}
+    .btnLove:hover{transform: translateY(-1px);filter:brightness(1.08);}
+    .btnSoft{background:#ffffff14;color:var(--txt);border:1px solid #ffffff22;}
+    .btnSoft:hover{transform: translateY(-1px);filter:brightness(1.1);}
+
+    .pill{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:12px 14px;border-radius:18px;background:#ffffff10;border:1px solid #ffffff1f;
+      margin-bottom:12px;
+    }
+    .pill strong{color:#fff}
+    .pill small{color:var(--muted)}
+
+    .quote{
+      margin-top:14px;padding:14px;border-radius:16px;background:#00000022;
+      border:1px dashed #ffffff22;color:#fff;line-height:1.8;
+    }
+
+    /* floating hearts */
+    .float{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+    .float span{
+      position:absolute;bottom:-60px;font-size:22px;opacity:.75;
+      animation: rise linear infinite;filter: drop-shadow(0 10px 15px #ff4d8d33);
+    }
+    @keyframes rise{
+      from{transform: translateY(0) scale(.9); opacity:.0}
+      10%{opacity:.75}
+      to{transform: translateY(-120vh) scale(1.25); opacity:0}
+    }
+
+    /* password gate */
+    .gate{
+      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+      padding:18px;background: linear-gradient(160deg,#0b1020ee,#1a1035ee);
+      z-index:999;
+    }
+    .gateCard{
+      width:min(520px, 100%);
+      border-radius:22px;background:#121a33f0;border:1px solid #ffffff22;
+      box-shadow: 0 20px 70px #00000080;padding:18px;
+      backdrop-filter: blur(14px);text-align:center;
+    }
+    .gateTitle{font-size:22px;margin:6px 0 8px;}
+    .gateDesc{color:var(--muted);margin:0 0 14px;line-height:1.7;}
+    .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+    input{
+      flex:1; min-width:220px; padding:12px 14px; border-radius:14px;
+      border:1px solid #ffffff22; background:#00000022; color:var(--txt);
+      outline:none; font-size:15px;
+    }
+    .err{margin-top:10px;color:#ffb3c9;min-height:22px;}
+    .hint{margin-top:10px;color:#cfd3ff88;font-size:13px;}
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      padding:16px; background:#000000a8; z-index:1000;
+    }
+    .modalCard{
+      width:min(780px, 100%);
+      background:#121a33f2; border:1px solid #ffffff22; border-radius:22px;
+      box-shadow:0 25px 80px #000000aa; overflow:hidden;
+    }
+    .modalTop{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 14px; border-bottom:1px solid #ffffff1a;
+    }
+    .modalTop b{font-size:16px}
+    .x{
+      cursor:pointer; border:1px solid #ffffff22; background:#ffffff10; color:var(--txt);
+      border-radius:12px; padding:8px 10px; font-weight:800;
+    }
+    .modalBody{padding:14px;}
+    .modalBody img{
+      width:100%; height:auto; display:block; border-radius:18px;
+      border:1px solid #ffffff1f;
+    }
+
+    /* inline panels */
+    .panel{
+      margin-top:12px;
+      display:none;
+      padding:12px 14px;
+      border-radius:18px;
+      border:1px solid #ffffff1f;
+      background:#00000022;
+      color:var(--txt);
+      line-height:1.9;
+    }
+    .panel small{color:var(--muted)}
+    .divider{height:1px;background:#ffffff1a;margin:10px 0;}
+    select{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid #ffffff22;
+      background:#00000022;
+      color:var(--txt);
+      outline:none;
+    }
+    audio{width:100%; margin-top:10px;}
+  </style>
+</head>
+
+<body>
+  <div class="float" aria-hidden="true" id="float"></div>
+
+  <!-- Password Gate -->
+  <div class="gate" id="gate">
+    <div class="gateCard">
+      <div class="badge">🔒 صفحة خاصة لخلود عيني</div>
+      <div class="gateTitle">اكتبي كلمة السر يا خلود ❤️</div>
+      <p class="gateDesc">دي رسالة مخصوص… ومش هتفتح غير بكلمة السر.</p>
+      <div class="row">
+        <input id="pass" type="password" placeholder="كلمة السر..." autocomplete="off" />
+        <button class="btnLove" onclick="unlock()">فتح 🎁</button>
+      </div>
+      <div class="err" id="err"></div>
+      <div class="hint">تلميح: اسم دلع/تاريخ مميز بينكم</div>
+    </div>
+  </div>
+
+  <!-- Modal: Photo -->
+  <div class="modal" id="photoModal" onclick="closeModal(event)">
+    <div class="modalCard">
+      <div class="modalTop">
+        <b> ضحكتك أجمل حاجة والله 💗</b>
+        <button class="x" onclick="hidePhoto()">✕</button>
+      </div>
+      <div class="modalBody">
+        <img id="kholoudImg" src="assets/img/kholoud.jpg" alt="Kholoud" />
+        <p style="margin:10px 4px 0; color:var(--muted);">
+          لو الصورة مش بتظهر: اتأكد إنها موجودة في <b>assets/img/</b> باسم <b>kholoud.jpg</b>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Content -->
+  <div class="wrap" id="site" style="display:none;">
+    <div class="badge">💌 Valentine</div>
+    <div class="badge">من عبدالرحمن ل حبيبة عين عبدالرحمن</div>
+
+    <h1>كل عيد حب وانتي الحب كله ي  <span>حبيبتي</span> ❤️</h1>
+    <p class="sub">
+      عملتلك الصفحة دي مخصوص عشان أقولك قد إيه إنتي غالية…
+      وجودك بيخلّي أي يوم عادي يبقى يوم <span style="color:var(--gold);font-weight:700;">مميز</span>.
+    </p>
+
+    <div class="grid">
+      <!-- Left -->
+      <div class="card">
+        <h2>رسالة من قلبي 💗</h2>
+        <p id="msg">
+          انتي مش بس حبيبتي ي حبيبتي انتي بنتي وحبيبتي 
+وامي وصاحبتي وبيتي وكل حاجه ليا انا بحبك اوي والله
+        </p>
+
+        <div class="ctaRow">
+          <button class="btnLove" onclick="surprise()">رساله مني ليكي</button>
+          <button class="btnSoft" onclick="copyText()">انسخ الرسالة ✨</button>
+
+          <!-- ✅ الأزرار اللي طلبتهم -->
+          <button class="btnSoft" onclick="showPhoto()">شمس يومي</button>
+          <button class="btnSoft" onclick="toggleLoveDate()">تاريخ حبنا ⏳</button>
+          <button class="btnSoft" onclick="toggleSongs()">أغانينا 🎶</button>
+        </div>
+
+        <div class="quote" id="quote">"بحبك قد الدنيا… وأكثر." 🌍❤️</div>
+
+        <!-- Panel: Love Date + Counters -->
+        <div class="panel" id="lovePanel">
+          <b>تاريخ حبنا:</b> <span id="loveDateText"></span>
+          <div class="divider"></div>
+          <b>عدّينا مع بعض:</b>
+          <div id="sinceText"></div>
+          <div class="divider"></div>
+          <b>فاضل ع عيد ميلاد حبيبة عيني❤️:</b>
+          <div id="countdownText"></div>
+          <small>وحشتيني اوي </small>
+        </div>
+
+        <!-- Panel: Songs -->
+        <div class="panel" id="songsPanel">
+          <b>أغانينا 🎶</b>
+          <div class="divider"></div>
+
+          <label style="display:block;margin-bottom:8px;color:var(--muted);">اختار أغنية:</label>
+          <select id="songSelect" onchange="changeSong()"></select>
+
+          <audio id="player" controls preload="metadata"></audio>
+
+          <div class="ctaRow" style="margin-top:10px;">
+            <button class="btnLove" onclick="playSong()">تشغيل ▶️</button>
+            <button class="btnSoft" onclick="pauseSong()">إيقاف ⏸️</button>
+            <button class="btnSoft" onclick="nextSong()">التالي ⏭️</button>
+          </div>
+
+          <small>لو المتصفح منع التشغيل التلقائي: دوس تشغيل يدوي أول مرة.</small>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="card">
+        <h2>3 حاجات بحبهم فيكي 🌸</h2>
+
+        <div class="pill">
+          <div><strong>عينك</strong><br><small>ببصتنا لبعض بتهون عليا كل حاجه</small></div>
+          <div>🤍</div>
+        </div>
+        <div class="pill">
+          <div><strong>ضحكتك</strong><br><small>بتعمل ليومي طعم والله</small></div>
+          <div>😊</div>
+        </div>
+        <div class="pill">
+          <div><strong>وجودك</strong><br><small>بيطمني </small></div>
+          <div>✨</div>
+        </div>
+
+        <div style="margin-top:14px;color:#cfd3ff99;font-size:13px;text-align:center;">
+          انتي وحشتيني اوي انا مقدرش اعيش من غيرك ي حبيبتي
+بعيد عن اني زعلان اوي منك بس كل عيد حب وانتي الحب كله انا بحبك اوي والله
+حقك عليا وعلى عيني لو زعلتك ف يوم من الايام
+انتي عارفه انك بنتيوكل حاجه ليا انا اسف ي حبيبتي على اي حاجه 
+وحشتيني اوي يحبيبي❤️
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================
+    // 1) كلمة السر (غيّرها)
+    // =========================
+    const PASSWORD = "147";
+
+    // =========================
+    // 2) تاريخ حبكم (غيّره)
+    // =========================
+    // تاريخ بداية حبكم (بداية العلاقة) — مثال: 2023-03-23
+    const LOVE_START = new Date("2023-03-23T00:00:00");
+
+    // تاريخ مناسبّة جاية عايز عداد ليها — مثال: 2026-12-05 (عيد الحب)
+    const TARGET_DATE = new Date("2026-12-05T00:00:00");
+
+    // =========================
+    // 3) أغانينا (غيّرها)
+    // =========================
+    const SONGS = [
+      { title: "أغنيتنا 1", file: "assets/music/song1.mp3" },
+      { title: "أغنيتنا 2", file: "assets/music/song2.mp3" },
+      { title: "أغنيتنا 3", file: "assets/music/song3.mp3" },
+    ];
+
+    // Floating hearts
+    const float = document.getElementById('float');
+    const hearts = ['❤️','💗','💖','💘','💝','💕'];
+    for(let i=0;i<26;i++){
+      const s=document.createElement('span');
+      s.textContent=hearts[Math.floor(Math.random()*hearts.length)];
+      s.style.left = Math.random()*100 + 'vw';
+      s.style.animationDuration = (8 + Math.random()*8) + 's';
+      s.style.animationDelay = (Math.random()*6) + 's';
+      s.style.fontSize = (18 + Math.random()*26) + 'px';
+      float.appendChild(s);
+    }
+
+    const quotes = [
+      'إنتي أحلى حاجة حصلتلي ي حبيبتي ❤️',
+      'انا بحبك اوي والله 💖',
+      'انتي بنتي 💗',
+      'إنتي بيتي ومش يتطمن غير بوجودك والله 💘',
+      'بحبك اد كل حاجه ربنا خلقها واكتر 💝'
+    ];
+
+    function surprise(){
+      document.getElementById('quote').textContent =
+        '"' + quotes[Math.floor(Math.random()*quotes.length)] + '"';
+    }
+
+    function copyText(){
+      const text = document.getElementById('msg').innerText + "\n\n" + document.getElementById('quote').innerText;
+      navigator.clipboard.writeText(text).then(()=>alert("اتنسخت ❤️"));
+    }
+
+    // Gate
+    function unlock(){
+      const input = document.getElementById('pass').value;
+      const err = document.getElementById('err');
+
+      if(input === PASSWORD){
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('site').style.display = 'block';
+        err.textContent = '';
+        initLove();
+        initSongs();
+      }else{
+        err.textContent = "كلمة السر غلط ي دكتوره";
+        document.getElementById('pass').value = '';
+        document.getElementById('pass').focus();
+      }
+    }
+    document.getElementById('pass').addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter') unlock();
+    });
+
+    // Photo modal
+    function showPhoto(){
+      document.getElementById('photoModal').style.display = 'flex';
+    }
+    function hidePhoto(){
+      document.getElementById('photoModal').style.display = 'none';
+    }
+    function closeModal(e){
+      if(e.target.id === "photoModal") hidePhoto();
+    }
+
+    // Love date + counters
+    let loveTimer = null;
+    function toggleLoveDate(){
+      const p = document.getElementById('lovePanel');
+      const isOpen = p.style.display === 'block';
+      p.style.display = isOpen ? 'none' : 'block';
+      if(!isOpen) startLoveTimer();
+      else stopLoveTimer();
+    }
+
+    function initLove(){
+      // عرض التاريخ بصيغة لطيفة
+      document.getElementById('loveDateText').textContent =
+        LOVE_START.toLocaleDateString('ar-EG', { year:'numeric', month:'long', day:'numeric' });
+
+      // حضّر النص مرة
+      updateLoveCounters();
+    }
+
+    function startLoveTimer(){
+      stopLoveTimer();
+      updateLoveCounters();
+      loveTimer = setInterval(updateLoveCounters, 1000);
+    }
+    function stopLoveTimer(){
+      if(loveTimer) clearInterval(loveTimer);
+      loveTimer = null;
+    }
+
+    function updateLoveCounters(){
+      const now = new Date();
+
+      // Time since LOVE_START
+      let diff = Math.max(0, now - LOVE_START); // ms
+      const sec = Math.floor(diff/1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const mins = Math.floor((sec % 3600) / 60);
+      const secs = sec % 60;
+
+      document.getElementById('sinceText').innerHTML =
+        `${days} يوم • ${hours} ساعة • ${mins} دقيقة • ${secs} ثانية 💗`;
+
+      // Countdown to TARGET_DATE
+      let left = TARGET_DATE - now;
+
+      if(left <= 0){
+        document.getElementById('countdownText').innerHTML =
+          `وصلنا للمناسبة 🎉 (${TARGET_DATE.toLocaleDateString('ar-EG')})`;
+        return;
+      }
+
+      const Lsec = Math.floor(left/1000);
+      const Ldays = Math.floor(Lsec / 86400);
+      const Lhours = Math.floor((Lsec % 86400) / 3600);
+      const Lmins = Math.floor((Lsec % 3600) / 60);
+      const Lsecs = Lsec % 60;
+
+      document.getElementById('countdownText').innerHTML =
+        `${Ldays} يوم • ${Lhours} ساعة • ${Lmins} دقيقة • ${Lsecs} ثانية ⏳`;
+    }
+
+    // Songs
+    let currentSongIndex = 0;
+    function initSongs(){
+      const select = document.getElementById('songSelect');
+      select.innerHTML = "";
+      SONGS.forEach((s, i)=>{
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = s.title;
+        select.appendChild(opt);
+      });
+      setSong(0);
+    }
+
+    function toggleSongs(){
+      const p = document.getElementById('songsPanel');
+      p.style.display = (p.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function setSong(i){
+      currentSongIndex = i;
+      const player = document.getElementById('player');
+      const select = document.getElementById('songSelect');
+      select.value = String(i);
+      player.src = SONGS[i].file;
+    }
+
+    function changeSong(){
+      const i = Number(document.getElementById('songSelect').value);
+      setSong(i);
+      playSong();
+    }
+
+    function playSong(){
+      const player = document.getElementById('player');
+      player.play().catch(()=>{ /* autoplay block */ });
+    }
+    function pauseSong(){
+      document.getElementById('player').pause();
+    }
+    function nextSong(){
+      let i = currentSongIndex + 1;
+      if(i >= SONGS.length) i = 0;
+      setSong(i);
+      playSong();
+    }
+  </script>
+</body>
+</html>
