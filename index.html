@@ -147,6 +147,22 @@
       outline:none;
     }
     audio{width:100%; margin-top:10px;}
+
+    /* ===== إضافة الفيديوهات فقط ===== */
+    .videosGrid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:12px;
+      margin-top:10px;
+    }
+    .videosGrid video{
+      width:100%;
+      aspect-ratio: 16 / 9;
+      border:0;
+      border-radius:16px;
+      border:1px solid #ffffff1f;
+      background:#00000022;
+    }
   </style>
 </head>
 
@@ -212,6 +228,9 @@
           <button class="btnSoft" onclick="showPhoto()">شمس يومي</button>
           <button class="btnSoft" onclick="toggleLoveDate()">تاريخ حبنا ⏳</button>
           <button class="btnSoft" onclick="toggleSongs()">أغانينا 🎶</button>
+
+          <!-- ✅ زرار الفيديوهات (إضافة فقط) -->
+          <button class="btnSoft" onclick="toggleVideos()">Videos 🎥</button>
         </div>
 
         <div class="quote" id="quote">"بحبك قد الدنيا… وأكثر." 🌍❤️</div>
@@ -245,6 +264,16 @@
           </div>
 
           <small>لو المتصفح منع التشغيل التلقائي: دوس تشغيل يدوي أول مرة.</small>
+        </div>
+
+        <!-- Panel: Videos (إضافة فقط) -->
+        <div class="panel" id="videosPanel">
+          <b>Videos 🎥</b>
+          <div class="divider"></div>
+
+          <div class="videosGrid" id="videosGrid"></div>
+
+          <small>لو الفيديو مش بيشتغل: خليه mp4 (H.264) واسم إنجليزي.</small>
         </div>
       </div>
 
@@ -299,6 +328,41 @@
       { title: "أغنيتنا 2", file: "assets/music/song2.mp3" },
       { title: "أغنيتنا 3", file: "assets/music/song3.mp3" },
     ];
+
+    // =========================
+    // 4) فيديوهاتك (8 فيديوهات محمّلين عندك) — إضافة فقط
+    // =========================
+    const VIDEOS = [
+      { title: "فيديو 1", file: "assets/videos/video1.mp4" },
+      { title: "فيديو 2", file: "assets/videos/video2.mp4" },
+      { title: "فيديو 3", file: "assets/videos/video3.mp4" },
+      { title: "فيديو 4", file: "assets/videos/video4.mp4" },
+      { title: "فيديو 5", file: "assets/videos/video5.mp4" },
+      { title: "فيديو 6", file: "assets/videos/video6.mp4" },
+      { title: "فيديو 7", file: "assets/videos/video7.mp4" },
+      { title: "فيديو 8", file: "assets/videos/video8.mp4" },
+    ];
+
+    function initVideos(){
+      const grid = document.getElementById("videosGrid");
+      grid.innerHTML = "";
+
+      VIDEOS.forEach(v=>{
+        const video = document.createElement("video");
+        video.src = v.file;
+        video.controls = true;
+        video.preload = "metadata";
+        video.playsInline = true;
+        grid.appendChild(video);
+      });
+    }
+
+    function toggleVideos(){
+      const p = document.getElementById('videosPanel');
+      const isOpen = p.style.display === 'block';
+      p.style.display = isOpen ? 'none' : 'block';
+      if(!isOpen) initVideos();
+    }
 
     // Floating hearts
     const float = document.getElementById('float');
@@ -474,4 +538,3 @@
   </script>
 </body>
 </html>
-
